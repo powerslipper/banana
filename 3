@@ -1,0 +1,67 @@
+# Alpha-Beta Pruning
+
+values = [2, 4, 1, 10]
+
+def alpha_beta(depth, index, maximizing, alpha, beta):
+
+    if depth == 2:
+        return values[index]
+
+    if maximizing:
+        best = -999
+
+        for i in range(2):
+            val = alpha_beta(depth+1, index*2+i, False, alpha, beta)
+            best = max(best, val)
+            alpha = max(alpha, best)
+
+            if beta <= alpha:
+                break
+
+        return best
+
+    else:
+        best = 999
+
+        for i in range(2):
+            val = alpha_beta(depth+1, index*2+i, True, alpha, beta)
+            best = min(best, val)
+            beta = min(beta, best)
+
+            if beta <= alpha:
+                break
+
+        return best
+
+
+result = alpha_beta(0, 0, True, -999, 999)
+
+print("Optimal Value:", result)
+
+
+
+
+
+
+. Aim
+To implement the Alpha-Beta Pruning algorithm in Python to find the optimal value in a game tree.
+2. Theory
+Alpha-Beta Pruning is an optimization technique used in Artificial Intelligence to improve the Minimax algorithm.
+
+It is used in two-player games like Chess and Tic-Tac-Toe.
+
+It works with two values:
+- Alpha (α): Best value that the maximizing player can guarantee.
+- Beta (β): Best value that the minimizing player can guarantee.
+When Beta becomes less than or equal to Alpha (β ≤ α), further searching of that branch is stopped because it cannot affect the final decision.
+
+This reduces unnecessary calculations and makes the search faster without changing the optimal result.
+
+1. Chess: Helps AI select the best possible move.
+2. Checkers: Evaluates possible moves and opponent responses.
+3. Tic-Tac-Toe: Helps AI select optimal moves.
+4. Connect Four: Evaluates winning and losing positions.
+5. Othello/Reversi: Helps select strong moves.
+6. Strategy Games: Reduces unnecessary game-tree calculations.
+8. Conclusion
+Thus, we successfully implemented the Alpha-Beta Pruning algorithm in Python. It reduces unnecessary node exploration and improves the efficiency of the Minimax algorithm while maintaining the optimal result.
